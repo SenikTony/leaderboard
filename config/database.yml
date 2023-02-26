@@ -20,6 +20,10 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: db
+  port: 5432
+  user: postgres
+  password: password
 
 development:
   <<: *default
@@ -80,7 +84,4 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  <<: *default
-  database: leaderboard_production
-  username: leaderboard
-  password: <%= ENV["LEADERBOARD_DATABASE_PASSWORD"] %>
+  url: <%= ENV["DATABASE_URL"] %>
