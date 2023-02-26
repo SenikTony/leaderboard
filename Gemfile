@@ -64,3 +64,8 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+group :development, :test do
+  gem "ffaker"
+  gem "factory_bot_rails"
+end
