@@ -45,6 +45,12 @@ Rails.application.configure do
   # Tell Active Support which deprecation messages to disallow.
   config.active_support.disallowed_deprecation_warnings = []
 
+  # FactoryBot settings
+  config.factory_bot.definition_file_paths = %w[app/factories]
+  config.generators do |g|
+    g.factory_bot dir: "app/factories"
+  end
+
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
 
