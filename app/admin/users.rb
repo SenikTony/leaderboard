@@ -17,7 +17,7 @@ ActiveAdmin.register User do
 
   filter :country
   filter :name
-  filter :points
+  filter :points, as: :numeric_range
 
   index do
     selectable_column
