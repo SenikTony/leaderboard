@@ -1,0 +1,33 @@
+<div class="section">
+    <div class="row s12 m6 container">
+      <%= form_with url: root_path, method: :get, data: { "turbo-frame": "country-collection" }, class: "col s12 m12" do |f| %>
+        <div class="input-field col s8 m8">
+          <%= f.collection_select :country, Country.collection_with_global, :first, :second, {}, { id: "country-select" } %>
+          <label for="country-select">Select country</label>
+        </div>
+
+        <div class="col s4 m4 center-align">
+          <%= f.button type: "submit", name: "submit", class: "input-field btn waves-effect waves-light" do %>
+            <span class="hide-on-small-only">Submit</span>
+            <i class="material-icons right hide-on-small-only">send</i>
+            <i class="material-icons hide-on-med-and-up">send</i>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+    <%= turbo_frame_tag "country-collection" do %>
+      <div class="row s12 m6 container">
+        <table class="striped centered">
+          <tbody>
+            <% @leaderboard.each do |user| %>
+              <tr>
+                <td><%= user.name %></td>
+                <td><%= user.points %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+</div>
