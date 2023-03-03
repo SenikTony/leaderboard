@@ -25,9 +25,21 @@ default: &default
   user: postgres
   password: password
 
+# I will need to think about differnt roles for replicas (only for read)
 development:
-  <<: *default
-  database: leaderboard_development
+  primary:
+    <<: *default
+    database: leaderboard_development
+  asia_db:
+    <<: *default
+    host: asia_db
+    database: region_asia_development
+    migrations_paths: db/region_asia_migrate
+  europe_db:
+    <<: *default
+    host: europe_db
+    database: region_europe_development
+    migrations_paths: db/region_europe_migrate
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.

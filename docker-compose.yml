@@ -11,6 +11,9 @@ services:
       - docker/env.app
     depends_on:
       - db
+      - asia_db
+      - europe_db
+      - redis
   db:
     image: 'postgres:9.5'
     env_file:
@@ -19,6 +22,22 @@ services:
       - 54321:5432
     volumes:
       - postgres_data:/var/lib/postgresql/data
+  asia_db:
+    image: 'postgres:9.5'
+    env_file:
+      - docker/env.db
+    ports:
+      - 54322:5432
+    volumes:
+      - postgres_asia_data:/var/lib/postgresql/data
+  europe_db:
+    image: 'postgres:9.5'
+    env_file:
+      - docker/env.db
+    ports:
+      - 54323:5432
+    volumes:
+      - postgres_europe_db:/var/lib/postgresql/data
   redis:
     platform: linux/amd64
     image: 'redis:6.2.6-alpine'
@@ -27,7 +46,22 @@ services:
     command: 'redis-server'
     volumes:
       - redis:/var/lib/redis/data
+  sidekiq:
+    depends_on:
+      - redis
+      - db
+      - asia_db
+      - europe_db
+    build: .
+    command: 'bash -c "bundle && bundle exec sidekiq -C config/sidekiq.yml"'
+    volumes:
+      - .:/myapp:z
+      - gems:/usr/local/bundle
+    env_file:
+      - docker/env.app
 volumes:
   postgres_data: {}
+  postgres_asia_data: {}
+  postgres_europe_db: {}
   redis: {}
   gems: {}

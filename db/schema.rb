@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_26_130733) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_02_192519) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -32,7 +32,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_26_130733) do
     t.string "name", default: "New country", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "region_id"
     t.index ["name"], name: "index_countries_on_name", unique: true
+    t.index ["region_id"], name: "index_countries_on_region_id"
+  end
+
+  create_table "regions", force: :cascade do |t|
+    t.string "name", default: "Default region", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_regions_on_name", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -45,5 +54,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_26_130733) do
     t.index ["name"], name: "index_users_on_name", unique: true
   end
 
+  add_foreign_key "countries", "regions"
   add_foreign_key "users", "countries"
 end

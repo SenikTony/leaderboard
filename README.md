@@ -1,26 +1,13 @@
 # README leaderborad progect
 
-Users leaderboard project
+1. Install Docker and docker-compose;
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+2. Open console, go to the project dir and execute `docker-compose up`;
 
-Things you may want to cover:
+3. Open new console tab and execute `docker-compose exec app bash` for open connection to docker instance with app;
 
-* Ruby version
+4. Execute `bin/rails db:create db:migrate db:seed` for the create databases and fill user tables random users
 
-* System dependencies
+5. Go to the browser to the `www.localhost:3000` (you need to edit `/etc/hosts` file if needed)
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+If you need sidekiq web interface use `www.localhost:3000/sidekiq` path. Password and Login are placed in `web.app`
