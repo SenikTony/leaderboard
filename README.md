@@ -8,4 +8,6 @@
 
 4. Execute `bin/rails db:create db:migrate db:seed` for the create databases and fill user tables random users
 
-5. Go to the browser to the www.localhost:3000 (you need to edit /etc/hosts file if needed)
+5. Go to the browser to the `www.localhost:3000` (you need to edit `/etc/hosts` file if needed)
+
+If you need sidekiq web interface use `www.localhost:3000/sidekiq` path. Password and Login are placed in `web.app`
