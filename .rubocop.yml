@@ -1,0 +1,155 @@
+require:
+  - rubocop-performance
+  - rubocop-rails
+
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 3.1.2
+  SuggestExtensions: false
+  DisplayCopNames: true
+  DisplayStyleGuide: true
+  Exclude:
+    - "bin/*"
+    - "db/schema.rb"
+    - "db/asia_db_schema.rb"
+    - "db/europe_db_schema.rb"
+    - "lib/templates/**/*"
+    - "**/node_modules/**/*"
+    - "tmp/**/*"
+    - "vendor/**/*"
+    - "log/**/*"
+
+#
+# Ruby Cops
+#
+
+Layout/CaseIndentation:
+  Enabled: false
+
+Layout/FirstArrayElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/HashAlignment:
+  Enabled: false
+
+Layout/LineLength:
+  Max: 120
+  Exclude:
+    - bin/bundle
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+Lint/AmbiguousBlockAssociation:
+  Enabled: false
+
+Lint/ScriptPermission:
+  Exclude:
+    - "Rakefile"
+
+Metrics/AbcSize:
+  Max: 35
+  Exclude:
+    - "spec/**/*"
+
+Metrics/BlockLength:
+  CountComments: false
+  Max: 50
+  Exclude:
+    - "config/**/*"
+    - "spec/**/*"
+
+Metrics/ClassLength:
+  Max: 250
+  Exclude:
+    - "spec/**/*"
+
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - bin/bundle
+
+Metrics/MethodLength:
+  Max: 25
+  Exclude:
+    - "db/migrate/*"
+    - "spec/**/*"
+    - bin/bundle
+    - app/models/factories/user_of_country.rb
+
+Metrics/PerceivedComplexity:
+  Exclude:
+    - bin/bundle
+
+Naming/PredicateName:
+  Enabled: false
+
+Performance/Casecmp:
+  Enabled: false
+
+Security/YAMLLoad:
+  Enabled: false
+
+Style/BarePercentLiterals:
+  EnforcedStyle: percent_q
+
+Style/BlockDelimiters:
+  EnforcedStyle: braces_for_chaining
+
+Style/Documentation:
+  Enabled: false
+
+Style/EmptyMethod:
+  EnforcedStyle: expanded
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+  # EnforcedStyle: never
+
+Style/Lambda:
+  EnforcedStyle: literal
+
+Style/ModuleFunction:
+  EnforcedStyle: extend_self
+
+Style/MutableConstant:
+  Enabled: false
+
+Style/PreferredHashMethods:
+  Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/StringLiteralsInInterpolation:
+  EnforcedStyle: double_quotes
+
+Style/TernaryParentheses:
+  EnforcedStyle: require_parentheses_when_complex
+
+#
+# Rails Cops
+#
+
+Rails/ApplicationRecord:
+  Exclude:
+    - "db/migrate/**"
+    - "db/region_asia_migrate/**"
+    - "db/region_europe_migrate/**"
+    - app/models/region_record_base.rb
+
+Rails/HasAndBelongsToMany:
+  Enabled: false
+
+Rails/OutputSafety:
+  Exclude:
+    - config/initializers/active_admin_filter_numeric_range.rb
+
+Rails/Present:
+  Exclude:
+    - bin/bundle
+
+Rails/RakeEnvironment:
+  Enabled: false
+
+Rails/SquishedSQLHeredocs:
+  Enabled: false

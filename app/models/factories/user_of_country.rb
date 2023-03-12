@@ -19,22 +19,22 @@ module Factories
         class_name = table_name.gsub(/ |-/, "_").classify
         return class_name.constantize if Object.const_defined?(class_name)
 
-        user_class = create_class(class_name, abstract_record_class(country.region.name)) do
+        create_class(class_name, abstract_record_class(country.region.name)) do
           self.table_name = table_name
           self.primary_key = "id"
 
           belongs_to :country, class_name: "Country"
 
           validates :name, presence: true, uniqueness: { case_sensitive: false }
-          validates :points, presence: true, 
-                             numericality: { 
-                               only_integer: true, 
-                               greater_than_or_equal_to: 150, 
+          validates :points, presence: true,
+                             numericality: {
+                               only_integer: true,
+                               greater_than_or_equal_to: 150,
                                less_than_or_equal_to: 1_000_000
                              }
-          
-          after_initialize { default_country_settings } 
-          before_save { default_country_settings } 
+
+          after_initialize { default_country_settings }
+          before_save { default_country_settings }
 
           scope :country_rating, -> { order(points: :desc).limit(100) }
 
@@ -54,15 +54,15 @@ module Factories
 
           def default_country_settings
             self.country_id = country_id
-            country = country_by_model_name
+            self.country = country_by_model_name
           end
         end
       end
 
       private
 
-      def create_class(class_name, superclass, &block)
-        klass = Class.new superclass, &block
+      def create_class(class_name, superclass, &)
+        klass = Class.new(superclass, &)
         Object.const_set class_name, klass
       end
 
