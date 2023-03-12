@@ -30,6 +30,6 @@ class LeaderBoard
   end
 
   def user_klass
-    user_klass ||= Factories::UserOfCountry.getting_class(country)
+    @user_klass ||= Factories::UserOfCountry.getting_class(country)
   end
 end

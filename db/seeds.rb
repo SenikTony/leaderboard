@@ -8,16 +8,15 @@
 
 # Create Regions
 
-Region.create(ApplicationRecord::REGIONS.map { |name| {name: name} })
+Region.create(ApplicationRecord::REGIONS.map { |name| { name: } })
 
 europe = Region.find_by(name: "Europe")
-Country.create(ApplicationRecord::EUROPE_COUNTRIES.map { |name| { region: europe, name: name } })
+Country.create(ApplicationRecord::EUROPE_COUNTRIES.map { |name| { region: europe, name: } })
 
 asia = Region.find_by(name: "Asia")
-Country.create(ApplicationRecord::ASIA_COUNTRIES.map { |name| { region: asia, name: name } })
+Country.create(ApplicationRecord::ASIA_COUNTRIES.map { |name| { region: asia, name: } })
 
 country_ids = Country.ids
 100_000.times do
   CreateNewRandomUserJob.perform_async(country_ids.sample)
 end
-
